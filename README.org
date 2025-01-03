@@ -1,0 +1,41 @@
+* bglproject 
+
+** Description
+   A simple project creation tool for bigloo. It generates starting projects for binary and library packages.
+
+** Usage 
+  Create a starting library package with:  
+
+  #+begin_src shell
+  bglproject_s create <project-name> 
+#+end_src
+
+  Create a starting binary package with:
+
+    #+begin_src shell
+  bglproject_s create <project-name> -bin 
+#+end_src
+
+  By default, the author's name is take from the =USER= environment variable but it can be set explicitly with:
+
+      #+begin_src shell
+  bglproject_s create <project-name> -bin --author <authors name> 
+#+end_src
+  
+
+** Building
+  Both the bigloo native and jvm backends are supported. To build,
+  execute:
+    #+begin_src shell
+  ./configure --prefix=<installation path prefix>; make
+#+end_src
+  where =<installation path prefix>= is the desired installation path
+  prefix (e.g, =/usr/local=). You usually want the path prefix to match
+  that used for Bigloo itself.
+
+** Installation
+  To install the library, execute:
+#+begin_src shell
+  make install
+#+end_src 
+

@@ -1,0 +1,13 @@
+#|
+{{project-name}}
+
+Copyright {{year}}, {{author-name}}
+
+|#
+
+(declare-library! '{{project-name}} 
+   :version "@VERSION@"
+   :srfi '({{project-name}})
+   :basename "{{project-name}}"
+   :module-eval '{{project-name}}_make_lib)
+
