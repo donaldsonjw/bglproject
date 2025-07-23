@@ -5,7 +5,7 @@
 (define *executable* #t)
 (define *create-project* #f)
 ;; default project type. valid values are 'library and 'bin
-(define *project-type* 'library)
+(define *project-type* 'lib)
 (define *working-dir* "./")
 (define *author-name* (getenv "USER"))
 (define *templates* '())
@@ -37,12 +37,31 @@
           (help "new <project-name>" "create a new project"))
        (set! *project-name* project-name)
        (set! *create-project* #t))
+      (section "Project Creation options")
       ((("--bin")
         (help "--bin" "create a bin project"))
+       (unless *create-project*
+          (args-parse-usage #f)
+          (exit 1))
        (set! *project-type* 'bin))
+      ((("--lib")
+        (help "--lib" "create a library project"))
+       (unless *create-project*
+          (args-parse-usage #f)
+          (exit 1))
+       (set! *project-type* 'lib))
       (("--author" ?author
-          (help "--author" "set the authors name"))
+          (help "--author <author-name>" "set the authors name"))
+       (unless *create-project*
+          (args-parse-usage #f)
+          (exit 1))
        (set! *author-name* author))
+      (("--workingdir" ?working-dir
+          (help "--workingdir <working-dir>" "set working dir (default ./)"))
+       (unless *create-project*
+          (args-parse-usage #f)
+          (exit 1))
+       (set! *working-dir* working-dir))
       (else
        (print "illegal argument '" else "'. Usage:")
        (args-parse-usage #f)
@@ -84,7 +103,7 @@
       (make-project-directory *working-dir* *project-name*) 
       (make-file-from-templates (make-file-path *working-dir* *project-name*) '("Makefile" "configure" "configure.scm") environment)
       (chmod (make-file-path *working-dir* *project-name* "configure") 'read 'execute)
-      (if (eq? *project-type* 'library)
+      (if (eq? *project-type* 'lib)
           (begin
              (make-directories (make-file-path *working-dir* *project-name* "src/lib/" *project-name*))
              (make-file-from-templates (make-file-path *working-dir* *project-name* "src/lib/" *project-name*) '("lib.init.in" "make_lib.scm" "lib.scm") environment))

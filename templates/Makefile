@@ -72,8 +72,8 @@ ZIP_EXT = zip
 VARIANT_SUFFIXES:=s u p
 
 # BIGLOO compiler flags
-BFLAGS_COMMON = -O6 -q -afile $(AFILE) -fsharing -freturn-goto -fstackable   
-BFLAGS_u = $(BFLAGS_COMMON) -unsafe -cgen
+BFLAGS_COMMON = -O6 -q -afile $(AFILE) -fsharing  
+BFLAGS_u = $(BFLAGS_COMMON) -unsafe
 BFLAGS_s = $(BFLAGS_COMMON)
 BFLAGS_p = $(BFLAGS_COMMON) -p
 
