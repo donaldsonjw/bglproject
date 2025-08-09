@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ! command -v bigloo &> /dev/null
+if ! command -v bigloo > /dev/null 2>&1
 then
     echo "bigloo could not be found and is required."
     echo "Please install bigloo to continue."
